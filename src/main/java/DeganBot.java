@@ -14,13 +14,11 @@ public class DeganBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        // TODO
-        return "DeganBot";
+        return Constants.BOT_NAME;
     }
 
     @Override
     public String getBotToken() {
-        // TODO
-        return "431107683:AAEj67esEqx_8GJjI970OhSeJqpiOnACtVo";
+        return Constants.BOT_TOKEN;
     }
 }

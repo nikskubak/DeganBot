@@ -21,6 +21,7 @@ public class MessageHandler {
     }
 
     public SendMessage handleIncomingMessage(Update update) {
+        System.out.print("\n" + update.toString());
         if (messageIsValid(update)) {
             return createTextSendMessage(update);
         } else {
