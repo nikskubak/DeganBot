@@ -6,4 +6,14 @@ public class SendMessageParameters {
      */
     private boolean isHaveKeyboard;
 
+    /**
+     * Current message have a text
+     */
+    private boolean isHaveText;
+
+    /**
+     * Current message have a photo
+     */
+    private boolean isHavePhoto;
+
 }

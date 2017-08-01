@@ -1,9 +1,13 @@
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.objects.PhotoSize;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MessageHandler {
@@ -69,5 +73,22 @@ public class MessageHandler {
         keyboardMarkup.setKeyboard(keyboard);
         // Add it to the message
         message.setReplyMarkup(keyboardMarkup);
+    }
+
+    public PhotoSize getPhoto(Update update) {
+        // Check that the update contains a message and the message has a photo
+        if (update.hasMessage() && update.getMessage().hasPhoto()) {
+            // When receiving a photo, you usually get different sizes of it
+            List<PhotoSize> photos = update.getMessage().getPhoto();
+
+            // We fetch the bigger photo
+            return photos.stream()
+                    .sorted(Comparator.comparing(PhotoSize::getFileSize).reversed())
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        // Return null if not found
+        return null;
     }
 }
